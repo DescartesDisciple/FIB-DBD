@@ -50,5 +50,83 @@ CONSTRAINT Repro_FK FOREIGN KEY (familia) REFERENCES Repro(familia));
 -- -------------------------------------------------
 -- PREGUNTA 3
 
+create table pib(paisAg varchar(1) primary key, pib integer);
+                                                           
+create table ag(ag varchar(1) primary key, paisAg varchar(1) references pib);
+                                                           
+create table deute(paisD varchar(1), paisAc varchar(1), deute integer, primary key(paisD, paisAc));
+                                                                                   
+create table R(ag varchar(1) references ag, paisD varchar(1), paisAc varchar(1), primary key(ag, paisD, paisAc), foreign key(paisD, paisAc) references deute);                                                      
+                                                           
 -- -------------------------------------------------
 -- PREGUNTA 4
+
+  CREATE TABLE Esplai
+(
+Nom VARCHAR (1),
+Adreca VARCHAR (1),
+CONSTRAINT PK_Esplai PRIMARY KEY (Nom)
+);
+                                                                                   
+CREATE TABLE Jornada
+(
+Data VARCHAR (1),
+SortSol VARCHAR (1),
+PostaSol VARCHAR (1),
+CONSTRAINT PK_Jornada PRIMARY KEY (Data)
+);
+                                                                                   
+CREATE TABLE Noi
+(
+Nom VARCHAR (1),
+Cognom1 VARCHAR (1),
+Cognom2 VARCHAR (1),
+Edat VARCHAR (1),
+CONSTRAINT PK_Noi PRIMARY KEY (Cognom1, Cognom2, Nom)
+);
+                                                                                   
+CREATE TABLE Tanda
+(
+Nom VARCHAR (1),
+Ident VARCHAR (1),
+CONSTRAINT PK_Tanda PRIMARY KEY (Nom, Ident),
+CONSTRAINT FK_Tanda_0 FOREIGN KEY (Nom) REFERENCES Esplai (Nom) ON DELETE CASCADE
+);
+                                                                                   
+CREATE TABLE Membre
+(
+Nom VARCHAR (1),
+Ident VARCHAR (1),
+Cognom1 VARCHAR (1),
+Cognom2 VARCHAR (1),
+NomNoi VARCHAR (1),
+CONSTRAINT PK_Membre PRIMARY KEY (Nom, Ident, Cognom1, Cognom2, NomNoi),
+CONSTRAINT FK_Membre_0 FOREIGN KEY (Nom, Ident) REFERENCES Tanda (Nom, Ident) ON DELETE CASCADE,
+CONSTRAINT FK_Membre_1 FOREIGN KEY (Cognom1, Cognom2, NomNoi) REFERENCES Noi (Cognom1, Cognom2, Nom) ON DELETE CASCADE
+);
+                                                                                   
+CREATE TABLE Calendari
+(
+Nom VARCHAR (1),
+Ident VARCHAR (1),
+Data VARCHAR (1),
+CONSTRAINT PK_Calendari PRIMARY KEY (Nom, Ident, Data),
+CONSTRAINT FK_Calendari_0 FOREIGN KEY (Nom, Ident) REFERENCES Tanda (Nom, Ident) ON DELETE CASCADE,
+CONSTRAINT FK_Calendari_1 FOREIGN KEY (Data) REFERENCES Jornada (Data) ON DELETE CASCADE
+);
+                                                                                   
+CREATE TABLE Sortida
+(
+Data VARCHAR (1),
+Nom VARCHAR (1) NOT NULL,
+Ident VARCHAR (1) NOT NULL,
+Cognom1 VARCHAR (1),
+Cognom2 VARCHAR (1),
+NomNoi VARCHAR (1),
+CONSTRAINT PK_Sortida PRIMARY KEY (Data, Cognom1, Cognom2, NomNoi),
+CONSTRAINT FK_Sortida_0 FOREIGN KEY (Data) REFERENCES Jornada (Data) ON DELETE CASCADE,
+CONSTRAINT FK_Sortida_1 FOREIGN KEY (Nom, Ident) REFERENCES Tanda (Nom, Ident) ON DELETE CASCADE,
+CONSTRAINT FK_Sortida_2 FOREIGN KEY (Cognom1, Cognom2, NomNoi) REFERENCES Noi (Cognom1, Cognom2, Nom) ON DELETE CASCADE,
+CONSTRAINT SortidesSOnACalendari FOREIGN KEY (Nom, Ident, Data) REFERENCES calendari(Nom, Ident, Data),
+CONSTRAINT SortidesSOnATanda FOREIGN KEY (Nom, Ident, Cognom1, Cognom2, NomNoi) REFERENCES membre(Nom, Ident, Cognom1, Cognom2,NomNoi)
+);                                                                                 
