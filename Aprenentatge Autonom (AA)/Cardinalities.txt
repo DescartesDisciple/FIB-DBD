@@ -1,0 +1,32 @@
+-- -------------------------------------------------
+-- PREGUNTA 1
+
+|join(R,S)| = SF * |R| * |S|
+
+SF(R[AxB]S) = 1
+
+cardinalitat = 1 * 15000 * 200
+
+cardinalitat=3000000
+
+-- -------------------------------------------------
+-- PREGUNTA 2
+
+|join(R,S)| = SF * |R| * |S|
+
+SF(R[A=B]S) = 1/max(ndist(A), ndist(B)) = 1/max(200, 0) = 1/200
+
+cardinalitat = 1/200 * 15000 * 200
+
+cardinalitat=15000
+
+-- -------------------------------------------------
+-- PREGUNTA 3
+
+|selection(R)| = SF * |R|
+
+SF(A IN c1,c2,...,cn) = min(1, n/ndist(A)) = min(1, 4/60) = 1/15
+
+cardinalitat = 1/15 * 15000
+
+cardinalitat=1000
