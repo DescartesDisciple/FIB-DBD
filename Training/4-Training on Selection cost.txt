@@ -33,7 +33,7 @@
 
   Select several tuples --> No index / B+
   
-    -B+ --> cost = h + (|O| - 1)/u + |O| = 5064.49
+    -B+ --> cost = h + (|O|-1)/u + |O| = 5064.49
     -No index --> cost = B
   
       B = 1000
@@ -46,7 +46,7 @@
   Select several tuples --> No index / clustered
   
     -No index --> cost = 1000.00
-    -Clustered --> cost = h + 1 +1.5 * (|O| - 1)/R
+    -Clustered --> cost = h + 1 + 1.5 * (|O|-1)/R
       
       h = 3 - 1 = 2
       
@@ -59,23 +59,106 @@
 -- -------------------------------------------------
 -- PREGUNTA 5
 
+  Select several tuples --> Hash
+    v = 1: 1 + k
+    
+    |O| = k * v
+    
+    |O| = 1/200 * 50 * 420
+    
+    k = 105
+
+    cost = 105 + 1
+    
+    cost = 106.00
+    
 -- -------------------------------------------------
 -- PREGUNTA 6
+
+  Select one tuple --> B+
+  
+  cost = h + 1
+  
+  u = 75 * 4 / 3 = 100
+  
+  h = 3 - 1  = 2
+  
+  cost = 2 + 1
+  
+  cost = 3.00
 
 -- -------------------------------------------------
 -- PREGUNTA 7
 
+  Select several tuples --> Clustered
+  
+  cost = h + 1 + 1.5 * (|O|-1)/R
+  
+   h = 3 - 1 = 2
+      
+  |O| = 1/140 * 50 * 420 = 21000
+      
+  R = 50
+      
+  cost = 7.47
+
 -- -------------------------------------------------
 -- PREGUNTA 8
 
+  Select several tuples --> No index
+  
+  cost = B
+  
+  B = 420
+  
+  cost = 420.00
+  
 -- -------------------------------------------------
 -- PREGUNTA 9
+
+  Select one tuple --> Clustered
+  
+  cost = 1 + h
+  
+  u = 75 * 4 / 3 = 100
+  
+  h = 3 - 1
+  
+  cost = 2 + 1
+  
+  cost = 3.00
 
 -- -------------------------------------------------
 -- PREGUNTA 10
 
+  Select several tuples --> B+
+  
+  cost = h + (|O|-1)/u + |O|
+  
+  u = 60 * 4/3 = 80
+  
+  h = 3 - 1 = 2
+  
+  |O| = 1/200 * 10 * 10000 = 50
+  
+  cost = 2 + 49/80 + 50
+  
+  cost = 52.61
+
 -- -------------------------------------------------
 -- PREGUNTA 11
+
+  Select one tuple --> B+
+  
+  cost = h + 1
+  
+  u = 60 * 4 / 3 = 80
+  
+  h = 3 - 1  = 2
+  
+  cost = 2 + 1
+  
+  cost = 3.00
 
 -- -------------------------------------------------
 -- PREGUNTA 12
