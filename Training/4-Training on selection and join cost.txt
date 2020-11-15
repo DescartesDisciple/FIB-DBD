@@ -38,6 +38,21 @@
 -- -------------------------------------------------
 -- PREGUNTA 4
 
+  CardinalitatSelect = 1/1000 * 10000 = 10
+  CardinalitatJoin = 1/10000 * 10 * 100000 = 100
+  
+  Només agafem atributs (idb i ab) de la taula B -> 20 + 20 = 40 bytes (B')
+  
+    10 tuples * (40 bytes/1 tupla) * (1 bloc/400 bytes) = 1 bloc
+    
+ CostSelect(B+, several tuples) = h + (|O|-1)/u + |O| = 5 + 9/40 + 10 = 12.225
+ CostJoin=
+    (BNL) = 8334.5
+    (RNL-B+) = 133.25
+    (RNL-Hash) = 111
+ 
+ CostTotal = CostSelect + CostJoin(RNL-Hash) = 111 + 12.225 = 123.225
+  
 
 -- -------------------------------------------------
 -- PREGUNTA 5
