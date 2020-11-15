@@ -1,7 +1,7 @@
 -- -------------------------------------------------
 -- PREGUNTA 1
   
-  CardinalitatJoin = 1/max(ndist(author),ndist(name)) * (5000 * 4) * (10000 * 10) = 1/20000 * 20000 * 100000 = 100000ç
+  CardinalitatJoin = 1/max(ndist(author),ndist(name)) * (5000 * 4) * (10000 * 10) = 1/20000 * 20000 * 100000 = 100000
   
   Author té index cluster --> 1.5 * B = 15000
   
@@ -10,10 +10,29 @@
 -- -------------------------------------------------
 -- PREGUNTA 2
 
+  CardinalitatJoin = 1/max(ndist(author),ndist(name)) * (5000 * 4) * (10000 * 10) = 1/20000 * 20000 * 100000 = 100000
   
+  CostJoin (Hash) = (2 * 5000) + (2 * 10000) + (5000 + 10000) = 45000  
 
 -- -------------------------------------------------
 -- PREGUNTA 3
+
+  CardinalitatSelect = (500 - 100)/(500 - 10) * 100000 = 81632.6 -> 81633
+  CardinalitatJoin = 1/5000 * 5000 * 81633 = 81633
+  
+  Només agafem atributs (codVinoC i codProdC) de la taula C -> 5 + 5 = 10 bytes (C')
+  
+    81633 tuples * (10 bytes/1 tupla) * (1 bloc/500 bytes) = 1632.66 -> 1633 blocs
+ 
+  Table C té cluster, per tant:
+  
+    CostSelect = 1.5 * B = 7500
+  
+  V i C' ja ordenades (no cal Sort), V té cluster -> 1.5 * B
+    
+    CostJoin(S-M) = 750 + 1633 = 2383
+    
+  CostTotal = CostSelect + CostJoin = 9883
 
 
 -- -------------------------------------------------
